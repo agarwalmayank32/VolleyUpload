@@ -41,8 +41,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private int PICK_IMAGE_REQUEST = 1;
 
-    private String UPLOAD_URL ="http://parlorbeacon.com/androidapp/shopkeeper/uploads/uploadprofilepic.php";
-
     private String KEY_IMAGE = "image";
     private String KEY_NAME = "email";
 
@@ -66,13 +64,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] imageBytes = baos.toByteArray();
-        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-        return encodedImage;
+        return Base64.encodeToString(imageBytes, Base64.DEFAULT);
     }
 
     private void uploadImage(){
         //Showing the progress dialog
         final ProgressDialog loading = ProgressDialog.show(this,"Uploading...","Please wait...",false,false);
+
+        String UPLOAD_URL = "http://parlorbeacon.com/androidapp/shopkeeper/uploads/uploadprofilepic.php";
+
         StringRequest stringRequest = new StringRequest(Request.Method.POST, UPLOAD_URL,
                 new Response.Listener<String>() {
                     @Override
@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 String name = editTextName.getText().toString().trim();
 
                 //Creating parameters
-                Map<String,String> params = new Hashtable<String, String>();
+                Map<String,String> params = new Hashtable<>();
 
                 //Adding parameters
                 params.put(KEY_IMAGE, image);
