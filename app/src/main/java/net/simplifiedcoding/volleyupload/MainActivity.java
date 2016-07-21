@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 String image = getStringImage(bitmap);
 
                 //Getting Image Name
-                String name = editTextName.getText().toString().trim();
+                String name = editTextName.getText().toString().trim().toLowerCase();
 
                 //Creating parameters
                 Map<String,String> params = new Hashtable<>();
